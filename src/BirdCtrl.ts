@@ -1,19 +1,67 @@
 import { Assert } from "./util/Assert";
 
 const { regClass, property } = Laya;
+const IdleImage = "/resources/images/BirdHero_01.png";
+let IdleTexture: Laya.Texture;
+const FlyImage = "/resources/images/BirdHero_02.png";
+let FlyTexture: Laya.Texture;
 
 @regClass()
 export class BirdCtrl extends Laya.Script {
     declare owner: Laya.Sprite;
 
+    private _isFlying: boolean = false;
+    private _isIdleing: boolean = true;
+
     //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
     onAwake(): void {
         Laya.stage.on(Laya.Event.MOUSE_DOWN, this, this.mouseDown);
+        // 去加载资源用来使用
+        Laya.loader.load(
+            [IdleImage, FlyImage],
+            Laya.Handler.create(this, () => {
+                IdleTexture = Laya.loader.getRes(IdleImage);
+                FlyTexture = Laya.loader.getRes(FlyImage);
+            })
+        );
     }
 
     mouseDown() {
         const rigidBody = this.owner.getComponent(Laya.RigidBody) || Assert.ComponentNotNull;
         rigidBody.linearVelocity = { x: 0, y: -10 };
+        if (this._isIdleing) {
+            this._isIdleing = false;
+            this.owner.texture = FlyTexture;
+            this._isFlying = true;
+            // 设置一个5帧后的延迟回调
+            Laya.timer.once((5 * 1000) / 60, this, () => {
+                // 5帧后切换回原始的skin
+                this.owner.texture = IdleTexture;
+                this._isFlying = false;
+                this._isIdleing = true;
+            });
+        } else if (this._isFlying) {
+            this.owner.texture = IdleTexture;
+            this._isFlying = false;
+            this._isIdleing = true;
+            // 设置一个2帧后的延迟回调
+            Laya.timer.once((2 * 1000) / 60, this, () => {
+                // 2帧后切换回原始的skin
+                this.owner.texture = IdleTexture;
+                this._isFlying = true;
+                this._isIdleing = false;
+                // 设置一个5帧后的延迟回调
+                Laya.timer.once((5 * 1000) / 60, this, () => {
+                    // 5帧后切换回原始的skin
+                    this.owner.texture = IdleTexture;
+                    this._isFlying = false;
+                    this._isIdleing = true;
+                });
+            });
+        }
+
+        // 切换到新的skin
+        // this.owner.skin = newSkin;
     }
 
     //组件被启用后执行，例如节点被添加到舞台后
