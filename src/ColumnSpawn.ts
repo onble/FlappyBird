@@ -73,6 +73,7 @@ export class ColumnSpawn extends Laya.Script {
      * 生成柱子
      */
     spawn() {
+        console.log("spawn");
         // bottom
         // 730-400
         // const bottomColumn: Laya.Sprite = this.ColumnPrefab.create() as Laya.Sprite;

@@ -140,6 +140,7 @@
     },
     {
       "_$id": "y0yfzbbt",
+      "_$var": true,
       "_$type": "Sprite",
       "name": "bird",
       "x": 130,

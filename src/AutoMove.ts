@@ -4,6 +4,8 @@
  * @brief       控制背景舞台自动想左边移动的脚本
  * @date        2024-08-18
  */
+import { BirdCtrl } from "./BirdCtrl";
+import { game } from "./Scenes/game";
 import { Assert } from "./util/Assert";
 
 const { regClass, property } = Laya;
@@ -11,14 +13,19 @@ const { regClass, property } = Laya;
 @regClass()
 export class AutoMove extends Laya.Script {
     declare owner: Laya.Sprite;
+    private _brid: Laya.Sprite;
+    private _bridScript: BirdCtrl;
 
     //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
     onAwake(): void {
         const rigidBody = this.owner.getComponent(Laya.RigidBody) || Assert.ComponentNotNull;
         rigidBody.linearVelocity = { x: -3, y: 0 };
-        Laya.stage.on("Gameover", this, (Xspeed: number = 0) => {
-            this.owner.getComponent(Laya.RigidBody).linearVelocity = { x: Xspeed, y: 0 };
-        });
+        // 使用事件监听容易出现问题
+        // Laya.stage.on("Gameover", this, (Xspeed: number = 0) => {
+        //     this.owner.getComponent(Laya.RigidBody).linearVelocity = { x: Xspeed, y: 0 };
+        // });
+        this._brid = game.instance.bird;
+        this._bridScript = this._brid.getComponent(BirdCtrl) || Assert.ComponentNotNull;
     }
 
     //组件被启用后执行，例如节点被添加到舞台后
@@ -34,7 +41,11 @@ export class AutoMove extends Laya.Script {
     //onDestroy(): void {}
 
     //每帧更新时执行，尽量不要在这里写大循环逻辑或者使用getComponent方法
-    //onUpdate(): void {}
+    onUpdate(): void {
+        if (this._bridScript.isGameOver) {
+            this.owner.getComponent(Laya.RigidBody).linearVelocity = { x: 0, y: 0 };
+        }
+    }
 
     //每帧更新时执行，在update之后执行，尽量不要在这里写大循环逻辑或者使用getComponent方法
     //onLateUpdate(): void {}
