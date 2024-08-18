@@ -11,7 +11,7 @@ export class ColumnSpawn extends Laya.Script {
     declare owner: Laya.Sprite;
 
     @property({ type: Laya.Prefab, tips: "柱子" })
-    private _Column: Laya.Prefab;
+    public ColumnPrefab: Laya.Prefab;
     /**
      * 随机生成下一个柱子的时间
      * 因为柱子间隔不一样，因此这个值也会进行随机改变
@@ -45,7 +45,34 @@ export class ColumnSpawn extends Laya.Script {
         if (this._timer >= this._ranTime) {
             this._timer = 0;
             this._ranTime = this.getRandom(3000, 4500);
+            this.spawn();
         }
+    }
+
+    /**
+     * 生成柱子
+     */
+    spawn() {
+        // bottom
+        // 300-660
+        const bottomColumn: Laya.Sprite = this.ColumnPrefab.create() as Laya.Sprite;
+        const bottomY = this.getRandom(300, 660);
+        bottomColumn.zOrder = 2;
+        bottomColumn.pos(1920, bottomY);
+
+        // 差值
+        // 245-348
+        const diff = this.getRandom(245, 348);
+        const topY = bottomY - diff;
+
+        // top
+        // 300-660
+        const topColumn: Laya.Sprite = this.ColumnPrefab.create() as Laya.Sprite;
+        topColumn.zOrder = 2;
+        bottomColumn.pos(1920, topY);
+
+        Laya.stage.addChild(bottomColumn);
+        Laya.stage.addChild(topColumn);
     }
 
     /**

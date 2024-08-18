@@ -15,7 +15,7 @@
     {
       "_$type": "e880bae9-e0d9-468e-b2bf-3612729a7c76",
       "scriptPath": "../src/ColumnSpawn.ts",
-      "Column": {
+      "ColumnPrefab": {
         "_$uuid": "2f4fc46f-0b74-4fab-9e1f-972b03120485",
         "_$type": "Prefab"
       }
