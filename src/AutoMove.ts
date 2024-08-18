@@ -16,6 +16,9 @@ export class AutoMove extends Laya.Script {
     onAwake(): void {
         const rigidBody = this.owner.getComponent(Laya.RigidBody) || Assert.ComponentNotNull;
         rigidBody.linearVelocity = { x: -3, y: 0 };
+        Laya.stage.on("Gameover", this, (Xspeed: number = 0) => {
+            this.owner.getComponent(Laya.RigidBody).linearVelocity = { x: Xspeed, y: 0 };
+        });
     }
 
     //组件被启用后执行，例如节点被添加到舞台后

@@ -38,6 +38,7 @@ export class BirdCtrl extends Laya.Script {
             return;
         }
         const rigidBody = this.owner.getComponent(Laya.RigidBody) || Assert.ComponentNotNull;
+        // 施加一个向上的力
         rigidBody.linearVelocity = { x: 0, y: -10 };
         if (this._isIdleing) {
             this._isIdleing = false;
@@ -71,6 +72,13 @@ export class BirdCtrl extends Laya.Script {
         }
     }
 
+    /**
+     * 碰撞检测，游戏结束的判断
+     * @param other
+     * @param self
+     * @param contact
+     * @returns
+     */
     onTriggerEnter(
         other: Laya.PhysicsColliderComponent | Laya.ColliderBase,
         self?: Laya.ColliderBase,
@@ -83,6 +91,7 @@ export class BirdCtrl extends Laya.Script {
         // 播放死亡状态
         this.owner.texture = DieTexture;
         this._isGameOver = true;
+        Laya.stage.event("Gameover", 0);
     }
 
     //组件被启用后执行，例如节点被添加到舞台后
