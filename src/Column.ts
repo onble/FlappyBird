@@ -37,6 +37,10 @@ export class Column extends Laya.Script {
 
     //每帧更新时执行，尽量不要在这里写大循环逻辑或者使用getComponent方法
     onUpdate(): void {
+        if (this.owner.x <= -255) {
+            this.owner.removeSelf();
+            Laya.Pool.recover("Column", this.owner);
+        }
         if (this._canAddScore && this.owner.x <= -50) {
             this._canAddScore = false;
             console.log("成绩增加");

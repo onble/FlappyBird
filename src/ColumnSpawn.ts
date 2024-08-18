@@ -75,7 +75,13 @@ export class ColumnSpawn extends Laya.Script {
     spawn() {
         // bottom
         // 730-400
-        const bottomColumn: Laya.Sprite = this.ColumnPrefab.create() as Laya.Sprite;
+        // const bottomColumn: Laya.Sprite = this.ColumnPrefab.create() as Laya.Sprite;
+        const bottomColumn: Laya.Sprite = Laya.Pool.getItemByCreateFun("Column", () => {
+            return this.ColumnPrefab.create();
+        });
+        bottomColumn.rotation = 0;
+        const bottomColumnScript: Column = bottomColumn.getComponent(Column) || Assert.ComponentNotNull;
+        bottomColumnScript.canAddScore = true;
         const bottomY = this.getRandom(730, 400);
         bottomColumn.pos(2000, bottomY);
 
@@ -85,12 +91,14 @@ export class ColumnSpawn extends Laya.Script {
         const topY = bottomY - diff;
 
         // top
-        const topColumn: Laya.Sprite = this.ColumnPrefab.create() as Laya.Sprite;
+        // const topColumn: Laya.Sprite = this.ColumnPrefab.create() as Laya.Sprite;
+        const topColumn: Laya.Sprite = Laya.Pool.getItemByCreateFun("Column", () => {
+            return this.ColumnPrefab.create();
+        });
         topColumn.pos(2000 + topColumn.width, topY);
         topColumn.rotation = 180;
         // 将top的增加分数的逻辑删除
         const ColumnScript: Column = topColumn.getComponent(Column) || Assert.ComponentNotNull;
-        // ColumnScript.destroy();
         ColumnScript.canAddScore = false;
 
         this._ColumnParent.addChild(topColumn);
