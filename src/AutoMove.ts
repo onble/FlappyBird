@@ -15,21 +15,28 @@ export class AutoMove extends Laya.Script {
     declare owner: Laya.Sprite;
     private _brid: Laya.Sprite;
     private _bridScript: BirdCtrl;
+    private _rigidBody: Laya.RigidBody;
 
     //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
     onAwake(): void {
-        const rigidBody = this.owner.getComponent(Laya.RigidBody) || Assert.ComponentNotNull;
-        rigidBody.linearVelocity = { x: -3, y: 0 };
+        this._rigidBody = this.owner.getComponent(Laya.RigidBody) || Assert.ComponentNotNull;
+        this._rigidBody.linearVelocity = { x: -3, y: 0 };
         // 使用事件监听容易出现问题
         // Laya.stage.on("Gameover", this, (Xspeed: number = 0) => {
         //     this.owner.getComponent(Laya.RigidBody).linearVelocity = { x: Xspeed, y: 0 };
         // });
         this._brid = game.instance.bird;
         this._bridScript = this._brid.getComponent(BirdCtrl) || Assert.ComponentNotNull;
+        Laya.stage.on("Again", this, () => {
+            this._rigidBody.linearVelocity = { x: -3, y: 0 };
+        });
     }
 
     //组件被启用后执行，例如节点被添加到舞台后
-    //onEnable(): void {}
+    onEnable(): void {
+        // 必须通过将物体添加到舞台后，再给一下速度
+        this._rigidBody.linearVelocity = { x: -3, y: 0 };
+    }
 
     //组件被禁用时执行，例如从节点从舞台移除后
     //onDisable(): void {}
@@ -43,7 +50,7 @@ export class AutoMove extends Laya.Script {
     //每帧更新时执行，尽量不要在这里写大循环逻辑或者使用getComponent方法
     onUpdate(): void {
         if (this._bridScript.isGameOver) {
-            this.owner.getComponent(Laya.RigidBody).linearVelocity = { x: 0, y: 0 };
+            this._rigidBody.linearVelocity = { x: 0, y: 0 };
         }
     }
 

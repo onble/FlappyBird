@@ -41,6 +41,8 @@ export class UICtrl extends Laya.Script {
         this._gameoverPanel.visible = false;
         this._gameoverPanel.alpha = 1;
         Laya.stage.event("Again");
+        this.score = 0;
+        this._txt_Score.text = `Score: ${this.score}`;
     }
 
     //组件被启用后执行，例如节点被添加到舞台后

@@ -1,3 +1,4 @@
+import { AutoMove } from "./AutoMove";
 import { Column } from "./Column";
 import { Assert } from "./util/Assert";
 
@@ -8,7 +9,7 @@ import { Assert } from "./util/Assert";
  * @date        2024-08-18
  */
 const { regClass, property } = Laya;
-
+let countCloumn = 0;
 @regClass()
 export class ColumnSpawn extends Laya.Script {
     declare owner: Laya.Sprite;
@@ -34,12 +35,21 @@ export class ColumnSpawn extends Laya.Script {
      * 游戏是否结束
      */
     private _isGameover: boolean = false;
+    /**
+     * 记录柱子的数组，用于最后消除屏幕内的柱子
+     */
+    // private _columnArr: Laya.Sprite[] = [];
 
     //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
     onAwake(): void {
         this._ColumnParent = (this.owner.getChildByName("ColumnParent") as Laya.Sprite) || Assert.ChildNotNull;
         Laya.stage.on("Gameover", this, () => {
             this._isGameover = true;
+        });
+        Laya.stage.on("Again", this, () => {
+            this._isGameover = false;
+            // 将柱子清空
+            this._ColumnParent.removeChildren(0, this._ColumnParent.numChildren);
         });
     }
 
@@ -85,6 +95,7 @@ export class ColumnSpawn extends Laya.Script {
         bottomColumnScript.canAddScore = true;
         const bottomY = this.getRandom(730, 400);
         bottomColumn.pos(2000, bottomY);
+        // bottomColumn.name = `bottom${countCloumn++}`;
 
         // 差值
         // 300-348
@@ -101,9 +112,15 @@ export class ColumnSpawn extends Laya.Script {
         // 将top的增加分数的逻辑删除
         const ColumnScript: Column = topColumn.getComponent(Column) || Assert.ComponentNotNull;
         ColumnScript.canAddScore = false;
+        // topColumn.name = `top${countCloumn++}`;
 
+        // topColumn.zOrder = 100;
+        // bottomColumn.zOrder = 200;
+        // this._ColumnParent.zOrder = 200;
         this._ColumnParent.addChild(topColumn);
         this._ColumnParent.addChild(bottomColumn);
+        // this._columnArr.push(bottomColumn);
+        // this._columnArr.push(topColumn);
     }
 
     /**
