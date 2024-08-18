@@ -1,3 +1,9 @@
+/**
+ * @file        BirdCtrl
+ * @author      onble
+ * @brief       控制小鸟
+ * @date        2024-08-18
+ */
 import { Assert } from "./util/Assert";
 
 const { regClass, property } = Laya;

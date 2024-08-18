@@ -14,8 +14,8 @@ export class GameRoot extends Laya.Script {
         this._bg1 = (this.owner.getChildByName("bg1") as Laya.Sprite) || Assert.ChildNotNull;
         this._bg2 = (this.owner.getChildByName("bg2") as Laya.Sprite) || Assert.ChildNotNull;
         this._bird = (this.owner.getChildByName("bird") as Laya.Sprite) || Assert.ChildNotNull;
-        this._bg1.zOrder = -1;
-        this._bg2.zOrder = -1;
+        this._bg1.zOrder = -2;
+        this._bg2.zOrder = -2;
         this._bird.zOrder = 1;
     }
 

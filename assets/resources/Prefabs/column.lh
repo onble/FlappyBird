@@ -1,0 +1,31 @@
+{
+  "_$ver": 1,
+  "_$id": "o3akhqia",
+  "_$type": "Sprite",
+  "name": "column",
+  "x": 1409,
+  "y": 459,
+  "width": 256,
+  "height": 1024,
+  "texture": {
+    "_$uuid": "e597f348-556a-41db-96bf-080037560910",
+    "_$type": "Texture"
+  },
+  "_$comp": [
+    {
+      "_$type": "RigidBody",
+      "type": "kinematic"
+    },
+    {
+      "_$type": "BoxCollider",
+      "x": 92,
+      "y": 9,
+      "width": 71,
+      "height": 1015
+    },
+    {
+      "_$type": "96f488b6-a38f-4c07-8c10-0e9e67b5c0c3",
+      "scriptPath": "../src/AutoMove.ts"
+    }
+  ]
+}

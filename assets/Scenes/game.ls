@@ -11,6 +11,14 @@
     {
       "_$type": "cda64fda-dce1-4dd1-99a0-3c0c48dbc52e",
       "scriptPath": "../src/GameRoot.ts"
+    },
+    {
+      "_$type": "e880bae9-e0d9-468e-b2bf-3612729a7c76",
+      "scriptPath": "../src/ColumnSpawn.ts",
+      "Column": {
+        "_$uuid": "2f4fc46f-0b74-4fab-9e1f-972b03120485",
+        "_$type": "Prefab"
+      }
     }
   ],
   "_$child": [
@@ -178,6 +186,15 @@
           "height": 1
         }
       ]
+    },
+    {
+      "_$id": "1h6mx2hk",
+      "_$prefab": "2f4fc46f-0b74-4fab-9e1f-972b03120485",
+      "name": "column",
+      "active": true,
+      "x": 1409,
+      "y": 459,
+      "visible": true
     }
   ]
 }
