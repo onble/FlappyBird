@@ -7,15 +7,28 @@ export class UICtrl extends Laya.Script {
     declare owner: Laya.Sprite;
     private _txt_Score: Laya.Text;
     private score: number = 0;
+    private _gameoverPanel: Laya.Sprite;
 
     //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
     onAwake(): void {
         this._txt_Score = (this.owner.getChildByName("txt_Score") as Laya.Text) || Assert.ChildNotNull;
+        this._gameoverPanel = (this.owner.getChildByName("gameoverPanel") as Laya.Sprite) || Assert.ChildNotNull;
+        this._gameoverPanel.visible = false;
         this._txt_Score.text = `Score: ${this.score}`;
         Laya.stage.on("AddScore", this, () => {
             this.score++;
             this._txt_Score.text = `Score: ${this.score}`;
         });
+        Laya.stage.on("Gameover", this, this.gameover);
+    }
+
+    /**
+     * 游戏结束
+     */
+    gameover() {
+        this._txt_Score.visible = false;
+        this._gameoverPanel.visible = true;
+        Laya.Tween.from(this._gameoverPanel, { alpha: 0 }, 500, Laya.Ease.linearIn);
     }
 
     //组件被启用后执行，例如节点被添加到舞台后
