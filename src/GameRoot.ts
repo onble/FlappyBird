@@ -8,14 +8,20 @@ export class GameRoot extends Laya.Script {
     private _bg1: Laya.Sprite;
     private _bg2: Laya.Sprite;
     private _bird: Laya.Sprite;
+    /**
+     * 生成柱子的父组件
+     */
+    private _ColumnParent: Laya.Sprite;
 
     //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
     onAwake(): void {
         this._bg1 = (this.owner.getChildByName("bg1") as Laya.Sprite) || Assert.ChildNotNull;
         this._bg2 = (this.owner.getChildByName("bg2") as Laya.Sprite) || Assert.ChildNotNull;
         this._bird = (this.owner.getChildByName("bird") as Laya.Sprite) || Assert.ChildNotNull;
+        this._ColumnParent = (this.owner.getChildByName("ColumnParent") as Laya.Sprite) || Assert.ChildNotNull;
         this._bg1.zOrder = -2;
         this._bg2.zOrder = -2;
+        this._ColumnParent.zOrder = -1;
         this._bird.zOrder = 1;
     }
 

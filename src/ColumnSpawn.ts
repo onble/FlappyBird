@@ -1,3 +1,5 @@
+import { Assert } from "./util/Assert";
+
 /**
  * @file        ColumnSpawn
  * @author      onble
@@ -23,9 +25,15 @@ export class ColumnSpawn extends Laya.Script {
      * 单位：毫秒
      */
     private _timer: number = 0;
+    /**
+     * 生成柱子的父组件
+     */
+    private _ColumnParent: Laya.Sprite;
 
     //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
-    //onAwake(): void {}
+    onAwake(): void {
+        this._ColumnParent = (this.owner.getChildByName("ColumnParent") as Laya.Sprite) || Assert.ChildNotNull;
+    }
 
     //组件被启用后执行，例如节点被添加到舞台后
     //onEnable(): void {}
@@ -54,25 +62,38 @@ export class ColumnSpawn extends Laya.Script {
      */
     spawn() {
         // bottom
-        // 300-660
+        // 730-400
         const bottomColumn: Laya.Sprite = this.ColumnPrefab.create() as Laya.Sprite;
-        const bottomY = this.getRandom(300, 660);
-        bottomColumn.zOrder = 2;
-        bottomColumn.pos(1920, bottomY);
+        const bottomY = this.getRandom(730, 400);
+        bottomColumn.pos(2000, bottomY);
 
         // 差值
-        // 245-348
-        const diff = this.getRandom(245, 348);
+        // 300-348
+        const diff = this.getRandom(300, 348);
         const topY = bottomY - diff;
-
+        // top
+        const topColumn: Laya.Sprite = this.ColumnPrefab.create() as Laya.Sprite;
+        topColumn.pos(2000 + topColumn.width, topY);
+        topColumn.rotation = 180;
+        this._ColumnParent.addChild(topColumn);
+        this._ColumnParent.addChild(bottomColumn);
         // top
         // 300-660
-        const topColumn: Laya.Sprite = this.ColumnPrefab.create() as Laya.Sprite;
-        topColumn.zOrder = 2;
-        bottomColumn.pos(1920, topY);
-
-        Laya.stage.addChild(bottomColumn);
-        Laya.stage.addChild(topColumn);
+        // 怎么3的y原点在上面，2的在下面吗？
+        // const topColumn: Laya.Sprite = this.ColumnPrefab.create() as Laya.Sprite;
+        // const topY = this.getRandom(300, 660);
+        // topColumn.pos(2000, topY);
+        // topColumn.rotation = 180;
+        // // 差值
+        // // 245-348
+        // const diff = this.getRandom(245, 348);
+        // const bottomY = topY + diff;
+        // // top
+        // // 300-660
+        // const bottomColumn: Laya.Sprite = this.ColumnPrefab.create() as Laya.Sprite;
+        // bottomColumn.pos(2000, bottomY);
+        // // this._ColumnParent.addChild(topColumn);
+        // this._ColumnParent.addChild(bottomColumn);
     }
 
     /**

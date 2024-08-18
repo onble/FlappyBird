@@ -192,9 +192,16 @@
       "_$prefab": "2f4fc46f-0b74-4fab-9e1f-972b03120485",
       "name": "column",
       "active": true,
-      "x": 1409,
-      "y": 459,
+      "x": 1453,
+      "y": 585,
       "visible": true
+    },
+    {
+      "_$id": "mtix6ou0",
+      "_$type": "Sprite",
+      "name": "ColumnParent",
+      "width": 1920,
+      "height": 1080
     }
   ]
 }
