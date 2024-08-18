@@ -144,7 +144,8 @@
       },
       "_$comp": [
         {
-          "_$type": "RigidBody"
+          "_$type": "RigidBody",
+          "gravityScale": 2
         },
         {
           "_$type": "BoxCollider",
@@ -152,6 +153,10 @@
           "y": 42,
           "width": 63,
           "height": 51
+        },
+        {
+          "_$type": "93d0b492-f4e2-49ad-8a85-3ecdf5ce9ba7",
+          "scriptPath": "../src/BirdCtrl.ts"
         }
       ]
     }
