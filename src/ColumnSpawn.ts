@@ -1,3 +1,4 @@
+import { Column } from "./Column";
 import { Assert } from "./util/Assert";
 
 /**
@@ -29,10 +30,17 @@ export class ColumnSpawn extends Laya.Script {
      * 生成柱子的父组件
      */
     private _ColumnParent: Laya.Sprite;
+    /**
+     * 游戏是否结束
+     */
+    private _isGameover: boolean = false;
 
     //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
     onAwake(): void {
         this._ColumnParent = (this.owner.getChildByName("ColumnParent") as Laya.Sprite) || Assert.ChildNotNull;
+        Laya.stage.on("Gameover", this, () => {
+            this._isGameover = true;
+        });
     }
 
     //组件被启用后执行，例如节点被添加到舞台后
@@ -49,6 +57,10 @@ export class ColumnSpawn extends Laya.Script {
 
     //每帧更新时执行，尽量不要在这里写大循环逻辑或者使用getComponent方法
     onUpdate(): void {
+        if (this._isGameover) {
+            this._timer = 0;
+            return;
+        }
         this._timer += Laya.timer.delta;
         if (this._timer >= this._ranTime) {
             this._timer = 0;
@@ -71,29 +83,18 @@ export class ColumnSpawn extends Laya.Script {
         // 300-348
         const diff = this.getRandom(300, 348);
         const topY = bottomY - diff;
+
         // top
         const topColumn: Laya.Sprite = this.ColumnPrefab.create() as Laya.Sprite;
         topColumn.pos(2000 + topColumn.width, topY);
         topColumn.rotation = 180;
+        // 将top的增加分数的逻辑删除
+        const ColumnScript: Column = topColumn.getComponent(Column) || Assert.ComponentNotNull;
+        // ColumnScript.destroy();
+        ColumnScript.canAddScore = false;
+
         this._ColumnParent.addChild(topColumn);
         this._ColumnParent.addChild(bottomColumn);
-        // top
-        // 300-660
-        // 怎么3的y原点在上面，2的在下面吗？
-        // const topColumn: Laya.Sprite = this.ColumnPrefab.create() as Laya.Sprite;
-        // const topY = this.getRandom(300, 660);
-        // topColumn.pos(2000, topY);
-        // topColumn.rotation = 180;
-        // // 差值
-        // // 245-348
-        // const diff = this.getRandom(245, 348);
-        // const bottomY = topY + diff;
-        // // top
-        // // 300-660
-        // const bottomColumn: Laya.Sprite = this.ColumnPrefab.create() as Laya.Sprite;
-        // bottomColumn.pos(2000, bottomY);
-        // // this._ColumnParent.addChild(topColumn);
-        // this._ColumnParent.addChild(bottomColumn);
     }
 
     /**

@@ -192,8 +192,8 @@
       "_$prefab": "2f4fc46f-0b74-4fab-9e1f-972b03120485",
       "name": "column",
       "active": true,
-      "x": 1453,
-      "y": 585,
+      "x": 1474,
+      "y": 399,
       "visible": true
     },
     {
