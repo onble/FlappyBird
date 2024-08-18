@@ -5,6 +5,8 @@ const IdleImage = "/resources/images/BirdHero_01.png";
 let IdleTexture: Laya.Texture;
 const FlyImage = "/resources/images/BirdHero_02.png";
 let FlyTexture: Laya.Texture;
+const DieImage = "/resources/images/BirdHero_03.png";
+let DieTexture: Laya.Texture;
 
 @regClass()
 export class BirdCtrl extends Laya.Script {
@@ -12,21 +14,29 @@ export class BirdCtrl extends Laya.Script {
 
     private _isFlying: boolean = false;
     private _isIdleing: boolean = true;
+    /**
+     * 是否游戏结束
+     */
+    private _isGameOver: boolean = false;
 
     //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
     onAwake(): void {
         Laya.stage.on(Laya.Event.MOUSE_DOWN, this, this.mouseDown);
         // 去加载资源用来使用
         Laya.loader.load(
-            [IdleImage, FlyImage],
+            [IdleImage, FlyImage, DieImage],
             Laya.Handler.create(this, () => {
                 IdleTexture = Laya.loader.getRes(IdleImage);
                 FlyTexture = Laya.loader.getRes(FlyImage);
+                DieTexture = Laya.loader.getRes(DieImage);
             })
         );
     }
 
     mouseDown() {
+        if (this._isGameOver) {
+            return;
+        }
         const rigidBody = this.owner.getComponent(Laya.RigidBody) || Assert.ComponentNotNull;
         rigidBody.linearVelocity = { x: 0, y: -10 };
         if (this._isIdleing) {
@@ -59,9 +69,20 @@ export class BirdCtrl extends Laya.Script {
                 });
             });
         }
+    }
 
-        // 切换到新的skin
-        // this.owner.skin = newSkin;
+    onTriggerEnter(
+        other: Laya.PhysicsColliderComponent | Laya.ColliderBase,
+        self?: Laya.ColliderBase,
+        contact?: any
+    ): void {
+        if (other.owner.name == "TopCollider") {
+            // 如果是天空上界，则什么也不做
+            return;
+        }
+        // 播放死亡状态
+        this.owner.texture = DieTexture;
+        this._isGameOver = true;
     }
 
     //组件被启用后执行，例如节点被添加到舞台后

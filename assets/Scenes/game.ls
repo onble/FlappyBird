@@ -159,6 +159,25 @@
           "scriptPath": "../src/BirdCtrl.ts"
         }
       ]
+    },
+    {
+      "_$id": "de0g6pqt",
+      "_$type": "Sprite",
+      "name": "TopCollider",
+      "y": -1,
+      "width": 2048,
+      "height": 1,
+      "_$comp": [
+        {
+          "_$type": "RigidBody",
+          "type": "static"
+        },
+        {
+          "_$type": "BoxCollider",
+          "width": 2048,
+          "height": 1
+        }
+      ]
     }
   ]
 }
