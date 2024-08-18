@@ -31,8 +31,11 @@
         },
         {
           "_$type": "96f488b6-a38f-4c07-8c10-0e9e67b5c0c3",
-          "scriptPath": "../src/AutoMove.ts",
-          "text": ""
+          "scriptPath": "../src/AutoMove.ts"
+        },
+        {
+          "_$type": "db946373-234e-4561-9c85-fd74c07e1dd3",
+          "scriptPath": "../src/RepeatingBg.ts"
         }
       ]
     },
@@ -54,8 +57,11 @@
         },
         {
           "_$type": "96f488b6-a38f-4c07-8c10-0e9e67b5c0c3",
-          "scriptPath": "../src/AutoMove.ts",
-          "text": ""
+          "scriptPath": "../src/AutoMove.ts"
+        },
+        {
+          "_$type": "db946373-234e-4561-9c85-fd74c07e1dd3",
+          "scriptPath": "../src/RepeatingBg.ts"
         }
       ]
     },
@@ -77,8 +83,11 @@
         },
         {
           "_$type": "96f488b6-a38f-4c07-8c10-0e9e67b5c0c3",
-          "scriptPath": "../src/AutoMove.ts",
-          "text": ""
+          "scriptPath": "../src/AutoMove.ts"
+        },
+        {
+          "_$type": "db946373-234e-4561-9c85-fd74c07e1dd3",
+          "scriptPath": "../src/RepeatingBg.ts"
         }
       ]
     },
@@ -101,8 +110,11 @@
         },
         {
           "_$type": "96f488b6-a38f-4c07-8c10-0e9e67b5c0c3",
-          "scriptPath": "../src/AutoMove.ts",
-          "text": ""
+          "scriptPath": "../src/AutoMove.ts"
+        },
+        {
+          "_$type": "db946373-234e-4561-9c85-fd74c07e1dd3",
+          "scriptPath": "../src/RepeatingBg.ts"
         }
       ]
     }

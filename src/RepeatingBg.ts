@@ -1,21 +1,22 @@
 /**
- * @file        AutoMove
+ * @file        RepeatingBg
  * @author      onble
- * @brief       控制背景舞台自动想左边移动的脚本
+ * @brief       控制背景循环显示
  * @date        2024-08-18
  */
-import { Assert } from "./util/Assert";
-
 const { regClass, property } = Laya;
 
 @regClass()
-export class AutoMove extends Laya.Script {
+export class RepeatingBg extends Laya.Script {
     declare owner: Laya.Sprite;
+    /**
+     * 重复显示物体的宽度
+     */
+    private _width: number;
 
     //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
     onAwake(): void {
-        const rigidBody = this.owner.getComponent(Laya.RigidBody) || Assert.ComponentNotNull;
-        rigidBody.linearVelocity = { x: -3, y: 0 };
+        this._width = this.owner.width;
     }
 
     //组件被启用后执行，例如节点被添加到舞台后
@@ -31,7 +32,11 @@ export class AutoMove extends Laya.Script {
     //onDestroy(): void {}
 
     //每帧更新时执行，尽量不要在这里写大循环逻辑或者使用getComponent方法
-    //onUpdate(): void {}
+    onUpdate(): void {
+        if (this.owner.x <= -this._width) {
+            this.owner.x += this._width * 2;
+        }
+    }
 
     //每帧更新时执行，在update之后执行，尽量不要在这里写大循环逻辑或者使用getComponent方法
     //onLateUpdate(): void {}
