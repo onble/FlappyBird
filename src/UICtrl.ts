@@ -8,6 +8,7 @@ export class UICtrl extends Laya.Script {
     private _txt_Score: Laya.Text;
     private score: number = 0;
     private _gameoverPanel: Laya.Sprite;
+    private _btn_Again: Laya.Button;
 
     //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
     onAwake(): void {
@@ -20,6 +21,8 @@ export class UICtrl extends Laya.Script {
             this._txt_Score.text = `Score: ${this.score}`;
         });
         Laya.stage.on("Gameover", this, this.gameover);
+        this._btn_Again = (this._gameoverPanel.getChildByName("btn_Again") as Laya.Button) || Assert.ChildNotNull;
+        this._btn_Again.on(Laya.Event.CLICK, this, this.btnAgainClick);
     }
 
     /**
@@ -29,6 +32,15 @@ export class UICtrl extends Laya.Script {
         this._txt_Score.visible = false;
         this._gameoverPanel.visible = true;
         Laya.Tween.from(this._gameoverPanel, { alpha: 0 }, 500, Laya.Ease.linearIn);
+    }
+    /**
+     * 点击再来一局按钮
+     */
+    btnAgainClick() {
+        this._txt_Score.visible = true;
+        this._gameoverPanel.visible = false;
+        this._gameoverPanel.alpha = 1;
+        Laya.stage.event("Again");
     }
 
     //组件被启用后执行，例如节点被添加到舞台后

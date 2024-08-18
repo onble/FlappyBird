@@ -40,6 +40,21 @@ export class BirdCtrl extends Laya.Script {
                 DieTexture = Laya.loader.getRes(DieImage);
             })
         );
+        Laya.stage.on("Again", this, this.againGame);
+    }
+    /**
+     * 当再一次游戏按钮点击之后，这边会收到事件的派发
+     * @returns
+     */
+    againGame() {
+        this._isGameOver = false;
+        this.owner.pos(130, 372);
+        this.owner.rotation = 0;
+        this._isFlying = false;
+        this._isIdleing = true;
+        this.owner.texture = IdleTexture;
+        const rigidBody = this.owner.getComponent(Laya.RigidBody) || Assert.ComponentNotNull;
+        rigidBody.linearVelocity = { x: 0, y: 0 };
     }
 
     mouseDown() {
