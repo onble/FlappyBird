@@ -88,6 +88,12 @@
         {
           "_$type": "db946373-234e-4561-9c85-fd74c07e1dd3",
           "scriptPath": "../src/RepeatingBg.ts"
+        },
+        {
+          "_$type": "BoxCollider",
+          "y": 270,
+          "width": 2048,
+          "height": 242
         }
       ]
     },
@@ -115,6 +121,37 @@
         {
           "_$type": "db946373-234e-4561-9c85-fd74c07e1dd3",
           "scriptPath": "../src/RepeatingBg.ts"
+        },
+        {
+          "_$type": "BoxCollider",
+          "y": 270,
+          "width": 2048,
+          "height": 242
+        }
+      ]
+    },
+    {
+      "_$id": "y0yfzbbt",
+      "_$type": "Sprite",
+      "name": "bird",
+      "x": 130,
+      "y": 372,
+      "width": 128,
+      "height": 128,
+      "texture": {
+        "_$uuid": "898ba90a-cfb2-41f2-8cf5-48f7a5edb1ac",
+        "_$type": "Texture"
+      },
+      "_$comp": [
+        {
+          "_$type": "RigidBody"
+        },
+        {
+          "_$type": "BoxCollider",
+          "x": 25,
+          "y": 42,
+          "width": 63,
+          "height": 51
         }
       ]
     }
