@@ -232,6 +232,7 @@
       "name": "UI",
       "width": 1920,
       "height": 1080,
+      "_mouseState": 2,
       "_$comp": [
         {
           "_$type": "44f32737-baec-457f-9361-04a0692d2539",
@@ -251,6 +252,69 @@
           "fontSize": 80,
           "color": "rgba(0, 0, 0, 1)",
           "leading": 2
+        },
+        {
+          "_$id": "ubi6r2c0",
+          "_$type": "Image",
+          "name": "gameoverPanel",
+          "width": 1920,
+          "height": 1080,
+          "_mouseState": 2,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "bottom": 0,
+          "skin": "res://2aa950f3-ef01-4399-8fd5-095484c8c23b",
+          "color": "#ffffff",
+          "_$child": [
+            {
+              "_$id": "4dnlyspx",
+              "_$type": "Text",
+              "name": "Text",
+              "x": 678.0000000000002,
+              "y": 285.99999999999994,
+              "width": 614,
+              "height": 188,
+              "text": "GAMEOVER",
+              "fontSize": 130,
+              "color": "rgba(207, 39, 39, 1)",
+              "align": "center",
+              "valign": "middle",
+              "leading": 2
+            },
+            {
+              "_$id": "4cioa21u",
+              "_$type": "Button",
+              "name": "btn_Rank",
+              "x": 871,
+              "y": 550,
+              "width": 251,
+              "height": 94,
+              "_mouseState": 2,
+              "skin": "res://d4cfd6a8-0d0a-475b-ac93-d85eaa646936",
+              "label": "排行榜",
+              "labelSize": 60,
+              "labelAlign": "center",
+              "labelVAlign": "middle",
+              "labelStroke": 2
+            },
+            {
+              "_$id": "gtpaubm5",
+              "_$type": "Button",
+              "name": "btn_Again",
+              "x": 871,
+              "y": 679,
+              "width": 251,
+              "height": 94,
+              "_mouseState": 2,
+              "skin": "res://d4cfd6a8-0d0a-475b-ac93-d85eaa646936",
+              "label": "再来一局",
+              "labelSize": 60,
+              "labelAlign": "center",
+              "labelVAlign": "middle",
+              "labelStroke": 2
+            }
+          ]
         }
       ]
     }
