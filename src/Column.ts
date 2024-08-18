@@ -41,9 +41,10 @@ export class Column extends Laya.Script {
             this.owner.removeSelf();
             Laya.Pool.recover("Column", this.owner);
         }
-        if (this._canAddScore && this.owner.x <= -50) {
+        if (this._canAddScore && this.owner.x <= 0) {
             this._canAddScore = false;
-            console.log("成绩增加");
+            // 计分
+            Laya.stage.event("AddScore");
         }
     }
 

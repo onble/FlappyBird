@@ -1,34 +1,21 @@
-/**
- * 控制各个组件的zOrder
- */
 import { Assert } from "./util/Assert";
 
 const { regClass, property } = Laya;
 
 @regClass()
-export class GameRoot extends Laya.Script {
+export class UICtrl extends Laya.Script {
     declare owner: Laya.Sprite;
-    private _bg1: Laya.Sprite;
-    private _bg2: Laya.Sprite;
-    private _bird: Laya.Sprite;
-    private _UI: Laya.Sprite;
-    /**
-     * 生成柱子的父组件
-     */
-    private _ColumnParent: Laya.Sprite;
+    private _txt_Score: Laya.Text;
+    private score: number = 0;
 
     //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
     onAwake(): void {
-        this._bg1 = (this.owner.getChildByName("bg1") as Laya.Sprite) || Assert.ChildNotNull;
-        this._bg2 = (this.owner.getChildByName("bg2") as Laya.Sprite) || Assert.ChildNotNull;
-        this._bird = (this.owner.getChildByName("bird") as Laya.Sprite) || Assert.ChildNotNull;
-        this._ColumnParent = (this.owner.getChildByName("ColumnParent") as Laya.Sprite) || Assert.ChildNotNull;
-        this._UI = (this.owner.getChildByName("UI") as Laya.Sprite) || Assert.ChildNotNull;
-        this._bg1.zOrder = -2;
-        this._bg2.zOrder = -2;
-        this._ColumnParent.zOrder = -1;
-        this._bird.zOrder = 1;
-        this._UI.zOrder = 2;
+        this._txt_Score = (this.owner.getChildByName("txt_Score") as Laya.Text) || Assert.ChildNotNull;
+        this._txt_Score.text = `Score: ${this.score}`;
+        Laya.stage.on("AddScore", this, () => {
+            this.score++;
+            this._txt_Score.text = `Score: ${this.score}`;
+        });
     }
 
     //组件被启用后执行，例如节点被添加到舞台后

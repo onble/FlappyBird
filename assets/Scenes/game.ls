@@ -1,6 +1,7 @@
 {
   "_$ver": 1,
   "_$id": "lx8mwule",
+  "_$runtime": "res://3bdb45f3-0df1-48a2-ba47-73bed76f5277",
   "_$type": "Scene",
   "left": 0,
   "right": 0,
@@ -200,8 +201,8 @@
           "_$prefab": "2f4fc46f-0b74-4fab-9e1f-972b03120485",
           "name": "column",
           "active": true,
-          "x": 876,
-          "y": 699.0000000000001,
+          "x": 915,
+          "y": 684.0000000000001,
           "visible": true
         },
         {
@@ -222,6 +223,34 @@
           "y": 135.0000000000001,
           "visible": true,
           "rotation": 180
+        }
+      ]
+    },
+    {
+      "_$id": "d2uqtcz1",
+      "_$type": "Sprite",
+      "name": "UI",
+      "width": 1920,
+      "height": 1080,
+      "_$comp": [
+        {
+          "_$type": "44f32737-baec-457f-9361-04a0692d2539",
+          "scriptPath": "../src/UICtrl.ts"
+        }
+      ],
+      "_$child": [
+        {
+          "_$id": "6eth32xa",
+          "_$type": "Text",
+          "name": "txt_Score",
+          "x": 69,
+          "y": 6,
+          "width": 441,
+          "height": 152,
+          "text": "Score:0",
+          "fontSize": 80,
+          "color": "rgba(0, 0, 0, 1)",
+          "leading": 2
         }
       ]
     }
