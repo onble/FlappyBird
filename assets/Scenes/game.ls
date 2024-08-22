@@ -201,8 +201,8 @@
           "_$prefab": "2f4fc46f-0b74-4fab-9e1f-972b03120485",
           "name": "column",
           "active": true,
-          "x": 777,
-          "y": 695.0000000000001,
+          "x": 561,
+          "y": 702.0000000000001,
           "visible": true
         },
         {
@@ -314,6 +314,43 @@
               "labelAlign": "center",
               "labelVAlign": "middle",
               "labelStroke": 2
+            }
+          ]
+        },
+        {
+          "_$id": "9tinu9br",
+          "_$type": "Dialog",
+          "name": "rankPanel",
+          "width": 1920,
+          "height": 1080,
+          "_mouseState": 2,
+          "_$child": [
+            {
+              "_$id": "cmcz4us5",
+              "_$type": "Image",
+              "name": "Image",
+              "x": 667,
+              "y": 157,
+              "width": 741,
+              "height": 630,
+              "skin": "res://3225dc27-5bcb-446e-8b66-27df87624835",
+              "sizeGrid": "71,44,40,42,0",
+              "color": "#ffffff"
+            },
+            {
+              "_$id": "501y3mpy",
+              "_$type": "Button",
+              "name": "close",
+              "x": 1355,
+              "y": 165,
+              "width": 41,
+              "height": 40,
+              "_mouseState": 2,
+              "skin": "res://60a9086c-a9c2-4e01-a563-355c117b509e",
+              "label": "",
+              "labelSize": 20,
+              "labelAlign": "center",
+              "labelVAlign": "middle"
             }
           ]
         }

@@ -13,7 +13,7 @@ const FlyImage = "/resources/images/BirdHero_02.png";
 let FlyTexture: Laya.Texture;
 const DieImage = "/resources/images/BirdHero_03.png";
 let DieTexture: Laya.Texture;
-
+let isGameOver: boolean = false;
 @regClass()
 export class BirdCtrl extends Laya.Script {
     declare owner: Laya.Sprite;
@@ -23,10 +23,10 @@ export class BirdCtrl extends Laya.Script {
     /**
      * 是否游戏结束
      */
-    private _isGameOver: boolean = false;
-    get isGameOver(): boolean {
-        return this._isGameOver;
-    }
+    // private _isGameOver: boolean = false;
+    // get isGameOver(): boolean {
+    //     return this._isGameOver;
+    // }
 
     //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
     onAwake(): void {
@@ -47,7 +47,7 @@ export class BirdCtrl extends Laya.Script {
      * @returns
      */
     againGame() {
-        this._isGameOver = false;
+        isGameOver = false;
         this.owner.pos(130, 372);
         this.owner.rotation = 0;
         this._isFlying = false;
@@ -58,7 +58,7 @@ export class BirdCtrl extends Laya.Script {
     }
 
     mouseDown() {
-        if (this._isGameOver) {
+        if (isGameOver) {
             return;
         }
         const rigidBody = this.owner.getComponent(Laya.RigidBody) || Assert.ComponentNotNull;
@@ -114,7 +114,7 @@ export class BirdCtrl extends Laya.Script {
         }
         // 播放死亡状态
         this.owner.texture = DieTexture;
-        this._isGameOver = true;
+        isGameOver = true;
         Laya.stage.event("Gameover", 0);
     }
 
