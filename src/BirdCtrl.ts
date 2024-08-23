@@ -7,11 +7,11 @@
 import { Assert } from "./util/Assert";
 
 const { regClass, property } = Laya;
-const IdleImage = "/resources/images/BirdHero_01.png";
+const IdleImage = "resources/images/BirdHero_01.png";
 let IdleTexture: Laya.Texture;
-const FlyImage = "/resources/images/BirdHero_02.png";
+const FlyImage = "resources/images/BirdHero_02.png";
 let FlyTexture: Laya.Texture;
-const DieImage = "/resources/images/BirdHero_03.png";
+const DieImage = "resources/images/BirdHero_03.png";
 let DieTexture: Laya.Texture;
 /**
  * 游戏是否结束

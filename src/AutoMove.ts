@@ -5,7 +5,7 @@
  * @date        2024-08-18
  */
 import { BirdCtrl } from "./BirdCtrl";
-import { game } from "./Scenes/game";
+import { main } from "./Scenes/main";
 import { Assert } from "./util/Assert";
 
 const { regClass, property } = Laya;
@@ -25,7 +25,7 @@ export class AutoMove extends Laya.Script {
         // Laya.stage.on("Gameover", this, (Xspeed: number = 0) => {
         //     this.owner.getComponent(Laya.RigidBody).linearVelocity = { x: Xspeed, y: 0 };
         // });
-        this._brid = game.instance.bird;
+        this._brid = main.instance.bird;
         this._bridScript = this._brid.getComponent(BirdCtrl) || Assert.ComponentNotNull;
         Laya.stage.on("Again", this, () => {
             this._rigidBody.linearVelocity = { x: -3, y: 0 };

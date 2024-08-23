@@ -2,7 +2,10 @@
   "resolution": {
     "designWidth": 1920,
     "designHeight": 1080,
-    "scaleMode": "fixedwidth"
+    "scaleMode": "showall",
+    "alignV": "middle",
+    "alignH": "center",
+    "screenMode": "horizontal"
   },
   "3D": {
     "lightClusterCount": {
