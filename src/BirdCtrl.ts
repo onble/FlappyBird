@@ -13,7 +13,14 @@ const FlyImage = "/resources/images/BirdHero_02.png";
 let FlyTexture: Laya.Texture;
 const DieImage = "/resources/images/BirdHero_03.png";
 let DieTexture: Laya.Texture;
+/**
+ * 游戏是否结束
+ */
 let isGameOver: boolean = false;
+/**
+ * 游戏是否开始
+ */
+let isStart: boolean = false;
 @regClass()
 export class BirdCtrl extends Laya.Script {
     declare owner: Laya.Sprite;
@@ -44,6 +51,13 @@ export class BirdCtrl extends Laya.Script {
             })
         );
         Laya.stage.on("Again", this, this.againGame);
+        // 开始的时候，让鸟先是静止的
+        const rigidBody = this.owner.getComponent(Laya.RigidBody) || Assert.ComponentNotNull;
+        rigidBody.type = "static";
+        Laya.stage.on("Start", this, () => {
+            this.owner.getComponent(Laya.RigidBody).type = "dynamic";
+            isStart = true;
+        });
     }
     /**
      * 当再一次游戏按钮点击之后，这边会收到事件的派发
@@ -61,6 +75,9 @@ export class BirdCtrl extends Laya.Script {
     }
 
     mouseDown() {
+        if (isStart === false) {
+            return;
+        }
         if (isGameOver) {
             return;
         }

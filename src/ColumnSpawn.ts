@@ -33,7 +33,7 @@ export class ColumnSpawn extends Laya.Script {
     /**
      * 游戏是否结束
      */
-    private _isGameover: boolean = false;
+    private _isGameover: boolean = true;
     /**
      * 记录柱子的数组，用于最后消除屏幕内的柱子
      */
@@ -49,6 +49,9 @@ export class ColumnSpawn extends Laya.Script {
             this._isGameover = false;
             // 将柱子清空
             this._ColumnParent.removeChildren(0, this._ColumnParent.numChildren);
+        });
+        Laya.stage.on("Start", this, () => {
+            this._isGameover = false;
         });
     }
 

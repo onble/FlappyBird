@@ -8,6 +8,10 @@ import { Assert } from "./util/Assert";
 
 const { regClass, property } = Laya;
 
+/**
+ * 游戏是否开始
+ */
+let isStart: boolean = false;
 @regClass()
 export class UICtrl extends Laya.Script {
     declare owner: Laya.Sprite;
@@ -45,6 +49,10 @@ export class UICtrl extends Laya.Script {
      * 排行榜对话框面板
      */
     private _rankPanel: Laya.Image;
+    /**
+     * 开始游戏文本
+     */
+    private _txt_Start: Laya.Text;
 
     //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
     onAwake(): void {
@@ -56,15 +64,25 @@ export class UICtrl extends Laya.Script {
         this._rankDialog = (this.owner.getChildByName("rankDialog") as Laya.Dialog) || Assert.ChildNotNull;
         this._rankPanel = (this._rankDialog.getChildByName("rankPanel") as Laya.Image) || Assert.ChildNotNull;
         this._txt_Rank = (this._rankPanel.getChildByName("txt_Rank") as Laya.Text) || Assert.ChildNotNull;
+        this._txt_Start = (this.owner.getChildByName("txt_Start") as Laya.Text) || Assert.ChildNotNull;
         this._gameoverPanel.visible = false;
         // 将对话框关闭
         this._rankDialog.visible = false;
         this._txt_Score.text = `Score: ${this.score}`;
+        // 一开始的时候将分数隐藏起来
+        this._txt_Score.visible = false;
         Laya.stage.on("AddScore", this, () => {
             this.score++;
             this._txt_Score.text = `Score: ${this.score}`;
         });
         Laya.stage.on("Gameover", this, this.gameover);
+        Laya.stage.on(Laya.Event.CLICK, this, () => {
+            if (isStart) return;
+            this._txt_Start.visible = false;
+            Laya.stage.event("Start");
+            this._txt_Score.visible = true;
+            isStart = true;
+        });
         this._btn_Again = (this._gameoverPanel.getChildByName("btn_Again") as Laya.Button) || Assert.ChildNotNull;
         this._btn_Again.on(Laya.Event.CLICK, this, this.btnAgainClick);
         this._btn_Rank = (this._gameoverPanel.getChildByName("btn_Rank") as Laya.Button) || Assert.ChildNotNull;
