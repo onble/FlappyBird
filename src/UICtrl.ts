@@ -5,12 +5,36 @@ const { regClass, property } = Laya;
 @regClass()
 export class UICtrl extends Laya.Script {
     declare owner: Laya.Sprite;
+    /**
+     * 分数文本对象
+     */
     private _txt_Score: Laya.Text;
+    /**
+     * 分数
+     */
     private score: number = 0;
+    /**
+     * 游戏结束面板
+     */
     private _gameoverPanel: Laya.Sprite;
+    /**
+     * 再来一局按钮
+     */
     private _btn_Again: Laya.Button;
-    @property({ type: Laya.Dialog, tips: "排行榜" })
-    private rankPanel: Laya.Dialog = null;
+    // @property({ type: Laya.Dialog, tips: "排行榜" })
+    // private rankPanel: Laya.Dialog = null;
+    /**
+     * 排行榜对话框
+     */
+    private _rankPanel: Laya.Dialog;
+    /**
+     * 打开排行榜按钮
+     */
+    private _btn_Rank: Laya.Button;
+    /**
+     * 排行榜文本内容
+     */
+    private _txt_Rank: Laya.Text;
 
     //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
     onAwake(): void {
@@ -19,7 +43,11 @@ export class UICtrl extends Laya.Script {
         // });
         this._txt_Score = (this.owner.getChildByName("txt_Score") as Laya.Text) || Assert.ChildNotNull;
         this._gameoverPanel = (this.owner.getChildByName("gameoverPanel") as Laya.Sprite) || Assert.ChildNotNull;
+        this._rankPanel = (this.owner.getChildByName("rankPanel") as Laya.Dialog) || Assert.ChildNotNull;
+        this._txt_Rank = (this._rankPanel.getChildByName("txtRank") as Laya.Text) || Assert.ChildNotNull;
         this._gameoverPanel.visible = false;
+        // 将对话框关闭
+        this._rankPanel.visible = false;
         this._txt_Score.text = `Score: ${this.score}`;
         Laya.stage.on("AddScore", this, () => {
             this.score++;
@@ -28,6 +56,8 @@ export class UICtrl extends Laya.Script {
         Laya.stage.on("Gameover", this, this.gameover);
         this._btn_Again = (this._gameoverPanel.getChildByName("btn_Again") as Laya.Button) || Assert.ChildNotNull;
         this._btn_Again.on(Laya.Event.CLICK, this, this.btnAgainClick);
+        this._btn_Rank = (this._gameoverPanel.getChildByName("btn_Rank") as Laya.Button) || Assert.ChildNotNull;
+        this._btn_Rank.on(Laya.Event.CLICK, this, this.btnRankClick);
     }
 
     /**
@@ -48,6 +78,15 @@ export class UICtrl extends Laya.Script {
         Laya.stage.event("Again");
         this.score = 0;
         this._txt_Score.text = `Score: ${this.score}`;
+    }
+
+    /**
+     * 点击排行榜按钮
+     */
+    btnRankClick() {
+        this._rankPanel.visible = true;
+        this._rankPanel.show(true, true);
+        // TODO:实现排名逻辑
     }
 
     //组件被启用后执行，例如节点被添加到舞台后

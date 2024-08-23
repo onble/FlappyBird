@@ -236,10 +236,7 @@
       "_$comp": [
         {
           "_$type": "44f32737-baec-457f-9361-04a0692d2539",
-          "scriptPath": "../src/UICtrl.ts",
-          "rankPanel": {
-            "_$ref": "9tinu9br"
-          }
+          "scriptPath": "../src/UICtrl.ts"
         }
       ],
       "_$child": [
@@ -326,6 +323,7 @@
           "name": "rankPanel",
           "width": 1920,
           "height": 1080,
+          "visible": false,
           "_mouseState": 2,
           "_$child": [
             {
@@ -336,24 +334,40 @@
               "y": 157,
               "width": 741,
               "height": 630,
+              "_mouseState": 2,
               "skin": "res://3225dc27-5bcb-446e-8b66-27df87624835",
               "sizeGrid": "71,44,40,42,0",
-              "color": "#ffffff"
-            },
-            {
-              "_$id": "501y3mpy",
-              "_$type": "Button",
-              "name": "close",
-              "x": 1355,
-              "y": 165,
-              "width": 41,
-              "height": 40,
-              "_mouseState": 2,
-              "skin": "res://60a9086c-a9c2-4e01-a563-355c117b509e",
-              "label": "",
-              "labelSize": 20,
-              "labelAlign": "center",
-              "labelVAlign": "middle"
+              "color": "#ffffff",
+              "_$child": [
+                {
+                  "_$id": "421ni0qi",
+                  "_$type": "Text",
+                  "name": "Text",
+                  "x": -667,
+                  "y": -157,
+                  "width": 120,
+                  "height": 30,
+                  "text": "Text",
+                  "fontSize": 20,
+                  "color": "#FFFFFF",
+                  "leading": 2
+                },
+                {
+                  "_$id": "501y3mpy",
+                  "_$type": "Button",
+                  "name": "close",
+                  "x": 687.9999999999998,
+                  "y": 8,
+                  "width": 41,
+                  "height": 40,
+                  "_mouseState": 2,
+                  "skin": "res://60a9086c-a9c2-4e01-a563-355c117b509e",
+                  "label": "",
+                  "labelSize": 20,
+                  "labelAlign": "center",
+                  "labelVAlign": "middle"
+                }
+              ]
             }
           ]
         }
