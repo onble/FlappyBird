@@ -27,6 +27,9 @@ export class BirdCtrl extends Laya.Script {
     // get isGameOver(): boolean {
     //     return this._isGameOver;
     // }
+    public getIsGameOver(): boolean {
+        return isGameOver;
+    }
 
     //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
     onAwake(): void {

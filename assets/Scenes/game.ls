@@ -236,7 +236,10 @@
       "_$comp": [
         {
           "_$type": "44f32737-baec-457f-9361-04a0692d2539",
-          "scriptPath": "../src/UICtrl.ts"
+          "scriptPath": "../src/UICtrl.ts",
+          "rankPanel": {
+            "_$ref": "9tinu9br"
+          }
         }
       ],
       "_$child": [

@@ -49,7 +49,7 @@ export class AutoMove extends Laya.Script {
 
     //每帧更新时执行，尽量不要在这里写大循环逻辑或者使用getComponent方法
     onUpdate(): void {
-        if (this._bridScript.isGameOver) {
+        if (this._bridScript.getIsGameOver()) {
             this._rigidBody.linearVelocity = { x: 0, y: 0 };
         }
     }

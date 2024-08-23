@@ -9,9 +9,14 @@ export class UICtrl extends Laya.Script {
     private score: number = 0;
     private _gameoverPanel: Laya.Sprite;
     private _btn_Again: Laya.Button;
+    @property({ type: Laya.Dialog, tips: "排行榜" })
+    private rankPanel: Laya.Dialog = null;
 
     //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
     onAwake(): void {
+        // this.rankPanel.closeHandler = Laya.Handler.create(this, (name: string) => {
+        //     console.log(name);
+        // });
         this._txt_Score = (this.owner.getChildByName("txt_Score") as Laya.Text) || Assert.ChildNotNull;
         this._gameoverPanel = (this.owner.getChildByName("gameoverPanel") as Laya.Sprite) || Assert.ChildNotNull;
         this._gameoverPanel.visible = false;
