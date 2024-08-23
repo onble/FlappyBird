@@ -114,6 +114,8 @@ export class BirdCtrl extends Laya.Script {
                 });
             });
         }
+        // 播放音效
+        Laya.SoundManager.playSound("resources/Audio/fly.mp3", 1);
     }
 
     /**
@@ -128,6 +130,7 @@ export class BirdCtrl extends Laya.Script {
         self?: Laya.ColliderBase,
         contact?: any
     ): void {
+        if (isGameOver) return;
         if (other.owner.name == "TopCollider") {
             // 如果是天空上界，则什么也不做
             return;
@@ -136,6 +139,8 @@ export class BirdCtrl extends Laya.Script {
         this.owner.texture = DieTexture;
         isGameOver = true;
         Laya.stage.event("Gameover", 0);
+        // 播放音效
+        Laya.SoundManager.playSound("resources/Audio/hit.mp3", 1);
     }
 
     //组件被启用后执行，例如节点被添加到舞台后

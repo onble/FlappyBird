@@ -47,6 +47,7 @@ export class Column extends Laya.Script {
             this._canAddScore = false;
             // 计分
             Laya.stage.event("AddScore");
+            Laya.SoundManager.playSound("resources/Audio/score.mp3");
         }
     }
 

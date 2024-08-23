@@ -320,7 +320,7 @@
         {
           "_$id": "9tinu9br",
           "_$type": "Dialog",
-          "name": "rankPanel",
+          "name": "rankDialog",
           "width": 1920,
           "height": 1080,
           "visible": false,
@@ -329,7 +329,7 @@
             {
               "_$id": "cmcz4us5",
               "_$type": "Image",
-              "name": "Panel",
+              "name": "rankPanel",
               "x": 667,
               "y": 157,
               "width": 741,
@@ -371,6 +371,22 @@
               ]
             }
           ]
+        },
+        {
+          "_$id": "u7dgdqu3",
+          "_$type": "Text",
+          "name": "txt_Start",
+          "x": 584.9999999999999,
+          "y": 852.9999999999999,
+          "width": 938,
+          "height": 152,
+          "text": "点击开始游戏",
+          "fontSize": 80,
+          "color": "rgba(65, 250, 80, 1)",
+          "bold": true,
+          "align": "center",
+          "valign": "middle",
+          "leading": 2
         }
       ]
     }
