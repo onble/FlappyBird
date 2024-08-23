@@ -78,7 +78,7 @@
       "_$id": "at5gy220",
       "_$type": "Sprite",
       "name": "ground1",
-      "y": 568,
+      "y": 720,
       "width": 2048,
       "height": 512,
       "texture": {
@@ -111,7 +111,7 @@
       "_$type": "Sprite",
       "name": "ground2",
       "x": 2048,
-      "y": 568,
+      "y": 720,
       "width": 2048,
       "height": 512,
       "texture": {

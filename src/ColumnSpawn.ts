@@ -21,7 +21,7 @@ export class ColumnSpawn extends Laya.Script {
      * 因为柱子间隔不一样，因此这个值也会进行随机改变
      * 单位：毫秒
      */
-    private _ranTime: number = 2000;
+    private _ranTime: number = 1000;
     /**
      * 记录距离上一个柱子生成过去了多久
      * 单位：毫秒
@@ -85,7 +85,7 @@ export class ColumnSpawn extends Laya.Script {
         this._timer += Laya.timer.delta;
         if (this._timer >= this._ranTime) {
             this._timer = 0;
-            this._ranTime = this.getRandom(3000, 4500) * this._adjustRatio;
+            this._ranTime = this.getRandom(1000, 4500) * this._adjustRatio;
             this.spawn();
         }
     }
@@ -103,13 +103,13 @@ export class ColumnSpawn extends Laya.Script {
         bottomColumn.rotation = 0;
         const bottomColumnScript: Column = bottomColumn.getComponent(Column) || Assert.ComponentNotNull;
         bottomColumnScript.canAddScore = true;
-        const bottomY = this.getRandom(730, 400);
+        const bottomY = this.getRandom(350, 1010);
         bottomColumn.pos(2000, bottomY);
         // bottomColumn.name = `bottom${countCloumn++}`;
 
         // 差值
         // 300-348
-        const diff = this.getRandom(300, 348);
+        const diff = this.getRandom(300, 800);
         const topY = bottomY - diff;
 
         // top
