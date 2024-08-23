@@ -82,8 +82,19 @@ export class BirdCtrl extends Laya.Script {
             return;
         }
         const rigidBody = this.owner.getComponent(Laya.RigidBody) || Assert.ComponentNotNull;
+        const boxCollider: Laya.BoxCollider = this.owner.getComponent(Laya.BoxCollider) || Assert.ComponentNotNull;
+
+        // 去获得当前设备的高度
+        const y = Laya.Browser.height;
+        const x = Laya.Browser.width;
+        const y2 = Laya.Browser.clientHeight;
+        const x2 = Laya.Browser.clientWidth;
+        console.log(`y:${y},x:${x},y2:${y2},x2:${x2}`);
         // 施加一个向上的力
+        // console.log("设计高度", Laya.stage.designHeight);
+        // rigidBody.linearVelocity = { x: 0, y: -15 * (Laya.Browser.clientHeight / Laya.stage.designHeight) };
         rigidBody.linearVelocity = { x: 0, y: -10 };
+        // boxCollider.density = 20 * (Laya.Browser.clientHeight / Laya.stage.designHeight);
         if (this._isIdleing) {
             this._isIdleing = false;
             this.owner.texture = FlyTexture;

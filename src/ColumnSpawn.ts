@@ -6,6 +6,7 @@
  */
 import { Column } from "./Column";
 import { Assert } from "./util/Assert";
+import { AutoMove } from "./AutoMove";
 
 const { regClass, property } = Laya;
 let countCloumn = 0;
@@ -35,12 +36,20 @@ export class ColumnSpawn extends Laya.Script {
      */
     private _isGameover: boolean = true;
     /**
+     * 调整倍率
+     */
+    private _adjustRatio: number;
+    /**
      * 记录柱子的数组，用于最后消除屏幕内的柱子
      */
     // private _columnArr: Laya.Sprite[] = [];
 
     //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
     onAwake(): void {
+        // this._adjustRatio = Laya.Browser.clientWidth / Laya.stage.designWidth;
+        this._adjustRatio = 1;
+        this._ranTime = this._ranTime * this._adjustRatio;
+        // 修改生成柱子的时间
         this._ColumnParent = (this.owner.getChildByName("ColumnParent") as Laya.Sprite) || Assert.ChildNotNull;
         Laya.stage.on("Gameover", this, () => {
             this._isGameover = true;
@@ -76,7 +85,7 @@ export class ColumnSpawn extends Laya.Script {
         this._timer += Laya.timer.delta;
         if (this._timer >= this._ranTime) {
             this._timer = 0;
-            this._ranTime = this.getRandom(3000, 4500);
+            this._ranTime = this.getRandom(3000, 4500) * this._adjustRatio;
             this.spawn();
         }
     }
@@ -85,7 +94,6 @@ export class ColumnSpawn extends Laya.Script {
      * 生成柱子
      */
     spawn() {
-        console.log("spawn");
         // bottom
         // 730-400
         // const bottomColumn: Laya.Sprite = this.ColumnPrefab.create() as Laya.Sprite;

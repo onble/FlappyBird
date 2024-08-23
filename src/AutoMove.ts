@@ -9,18 +9,22 @@ import { main } from "./Scenes/main";
 import { Assert } from "./util/Assert";
 
 const { regClass, property } = Laya;
-
+let xSpeed: number = -6;
 @regClass()
 export class AutoMove extends Laya.Script {
     declare owner: Laya.Sprite;
     private _brid: Laya.Sprite;
     private _bridScript: BirdCtrl;
     private _rigidBody: Laya.RigidBody;
+    // 速度为-10,则点击20下才能到达第一个程序生成的柱子所在位置
+    // private _xSpeed: number = -10;
+    private _xSpeed: number = -5;
 
     //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
     onAwake(): void {
+        // this._xSpeed = this._xSpeed * (Laya.Browser.clientWidth / Laya.stage.designWidth);
         this._rigidBody = this.owner.getComponent(Laya.RigidBody) || Assert.ComponentNotNull;
-        this._rigidBody.linearVelocity = { x: -3, y: 0 };
+        this._rigidBody.linearVelocity = { x: this._xSpeed, y: 0 };
         // 使用事件监听容易出现问题
         // Laya.stage.on("Gameover", this, (Xspeed: number = 0) => {
         //     this.owner.getComponent(Laya.RigidBody).linearVelocity = { x: Xspeed, y: 0 };
@@ -28,14 +32,14 @@ export class AutoMove extends Laya.Script {
         this._brid = main.instance.bird;
         this._bridScript = this._brid.getComponent(BirdCtrl) || Assert.ComponentNotNull;
         Laya.stage.on("Again", this, () => {
-            this._rigidBody.linearVelocity = { x: -3, y: 0 };
+            this._rigidBody.linearVelocity = { x: this._xSpeed, y: 0 };
         });
     }
 
     //组件被启用后执行，例如节点被添加到舞台后
     onEnable(): void {
         // 必须通过将物体添加到舞台后，再给一下速度
-        this._rigidBody.linearVelocity = { x: -3, y: 0 };
+        this._rigidBody.linearVelocity = { x: this._xSpeed, y: 0 };
     }
 
     //组件被禁用时执行，例如从节点从舞台移除后
