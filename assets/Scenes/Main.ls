@@ -78,7 +78,7 @@
       "_$id": "at5gy220",
       "_$type": "Sprite",
       "name": "ground1",
-      "y": 720,
+      "y": 760,
       "width": 2048,
       "height": 512,
       "texture": {
@@ -111,7 +111,7 @@
       "_$type": "Sprite",
       "name": "ground2",
       "x": 2048,
-      "y": 720,
+      "y": 760,
       "width": 2048,
       "height": 512,
       "texture": {
@@ -201,8 +201,8 @@
           "_$prefab": "2f4fc46f-0b74-4fab-9e1f-972b03120485",
           "name": "column",
           "active": true,
-          "x": 561,
-          "y": 702.0000000000001,
+          "x": 534,
+          "y": 941,
           "visible": true
         },
         {
@@ -219,8 +219,8 @@
           "_$prefab": "2f4fc46f-0b74-4fab-9e1f-972b03120485",
           "name": "column(2)",
           "active": true,
-          "x": 2057,
-          "y": 135.0000000000001,
+          "x": 2055,
+          "y": 144.0000000000001,
           "visible": true,
           "rotation": 180
         }
