@@ -329,7 +329,7 @@
             {
               "_$id": "cmcz4us5",
               "_$type": "Image",
-              "name": "Image",
+              "name": "Panel",
               "x": 667,
               "y": 157,
               "width": 741,
@@ -342,14 +342,15 @@
                 {
                   "_$id": "421ni0qi",
                   "_$type": "Text",
-                  "name": "Text",
-                  "x": -667,
-                  "y": -157,
-                  "width": 120,
-                  "height": 30,
+                  "name": "txt_Rank",
+                  "y": 99,
+                  "width": 741,
+                  "height": 531,
                   "text": "Text",
-                  "fontSize": 20,
-                  "color": "#FFFFFF",
+                  "fontSize": 150,
+                  "color": "rgba(21, 91, 196, 1)",
+                  "align": "center",
+                  "valign": "middle",
                   "leading": 2
                 },
                 {

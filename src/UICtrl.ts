@@ -1,3 +1,9 @@
+/**
+ * @file        UICtrl
+ * @author      onble
+ * @brief       控制UI的逻辑
+ * @date        2024-08-23
+ */
 import { Assert } from "./util/Assert";
 
 const { regClass, property } = Laya;
@@ -26,7 +32,7 @@ export class UICtrl extends Laya.Script {
     /**
      * 排行榜对话框
      */
-    private _rankPanel: Laya.Dialog;
+    private _rankDialog: Laya.Dialog;
     /**
      * 打开排行榜按钮
      */
@@ -35,6 +41,10 @@ export class UICtrl extends Laya.Script {
      * 排行榜文本内容
      */
     private _txt_Rank: Laya.Text;
+    /**
+     * 排行榜对话框面板
+     */
+    private _rankPanel: Laya.Image;
 
     //组件被激活后执行，此时所有节点和组件均已创建完毕，此方法只执行一次
     onAwake(): void {
@@ -43,11 +53,12 @@ export class UICtrl extends Laya.Script {
         // });
         this._txt_Score = (this.owner.getChildByName("txt_Score") as Laya.Text) || Assert.ChildNotNull;
         this._gameoverPanel = (this.owner.getChildByName("gameoverPanel") as Laya.Sprite) || Assert.ChildNotNull;
-        this._rankPanel = (this.owner.getChildByName("rankPanel") as Laya.Dialog) || Assert.ChildNotNull;
-        this._txt_Rank = (this._rankPanel.getChildByName("txtRank") as Laya.Text) || Assert.ChildNotNull;
+        this._rankDialog = (this.owner.getChildByName("rankDialog") as Laya.Dialog) || Assert.ChildNotNull;
+        this._rankPanel = (this._rankDialog.getChildByName("rankPanel") as Laya.Image) || Assert.ChildNotNull;
+        this._txt_Rank = (this._rankPanel.getChildByName("txt_Rank") as Laya.Text) || Assert.ChildNotNull;
         this._gameoverPanel.visible = false;
         // 将对话框关闭
-        this._rankPanel.visible = false;
+        this._rankDialog.visible = false;
         this._txt_Score.text = `Score: ${this.score}`;
         Laya.stage.on("AddScore", this, () => {
             this.score++;
@@ -84,9 +95,39 @@ export class UICtrl extends Laya.Script {
      * 点击排行榜按钮
      */
     btnRankClick() {
-        this._rankPanel.visible = true;
-        this._rankPanel.show(true, true);
-        // TODO:实现排名逻辑
+        this._rankDialog.visible = true;
+        this._rankDialog.show(true, true);
+        // 排名的逻辑
+        // 从本地获得前三名的成绩
+        // Laya.LocalStorage.clear();
+        const one = Number(Laya.LocalStorage.getItem("One")) || 0;
+        const two = Number(Laya.LocalStorage.getItem("Two")) || 0;
+        const three = Number(Laya.LocalStorage.getItem("Three")) || 0;
+        let scoreArr: Array<number> = [];
+        scoreArr.push(one, two, three, this.score);
+        console.log("scoreArr", [scoreArr]);
+        scoreArr = this.bubbleSort(scoreArr);
+        Laya.LocalStorage.setItem("One", `${scoreArr[0]}`);
+        Laya.LocalStorage.setItem("Two", `${scoreArr[1]}`);
+        Laya.LocalStorage.setItem("Three", `${scoreArr[2]}`);
+
+        this._txt_Rank.text = `1 - ${scoreArr[0]}\n2 - ${scoreArr[1]}\n3 - ${scoreArr[2]}`;
+    }
+    /**
+     * 手写一个冒泡排序
+     */
+    bubbleSort(arr: Array<number>) {
+        const len = arr.length;
+        for (let i = 0; i < len; i++) {
+            for (let j = 0; j < len - i - 1; j++) {
+                if (arr[j] < arr[j + 1]) {
+                    const temp = arr[j + 1];
+                    arr[j + 1] = arr[j];
+                    arr[j] = temp;
+                }
+            }
+        }
+        return arr;
     }
 
     //组件被启用后执行，例如节点被添加到舞台后

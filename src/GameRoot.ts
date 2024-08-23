@@ -1,5 +1,8 @@
 /**
- * 控制各个组件的zOrder
+ * @file        GameRoot
+ * @author      onble
+ * @brief       控制各个组件的zOrder
+ * @date        2024-08-23
  */
 import { Assert } from "./util/Assert";
 

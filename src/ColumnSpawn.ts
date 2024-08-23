@@ -1,13 +1,12 @@
-import { AutoMove } from "./AutoMove";
-import { Column } from "./Column";
-import { Assert } from "./util/Assert";
-
 /**
  * @file        ColumnSpawn
  * @author      onble
  * @brief       控制柱子
  * @date        2024-08-18
  */
+import { Column } from "./Column";
+import { Assert } from "./util/Assert";
+
 const { regClass, property } = Laya;
 let countCloumn = 0;
 @regClass()
